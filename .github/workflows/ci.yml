@@ -1,0 +1,41 @@
+name: CI - Tests, Linting & Coverage
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    name: Test (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-22.04, macos-latest]
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout code (including submodules)
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Install dependencies (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y bats kcov shellcheck
+
+      - name: Install dependencies (macOS)
+        if: runner.os == 'macOS'
+        run: |
+          brew install bats-core kcov shellcheck
+
+      - name: Run ShellCheck linter
+        run: shellcheck vet
+
+      - name: Run tests and generate coverage report
+        run: |
+          bats tests/
