@@ -9,8 +9,9 @@ const INSTALL_SCRIPT_URL = `https://raw.githubusercontent.com/${GITHUB_REPO}/mai
 export default {
     async fetch(request) {
         const userAgent = request.headers.get("User-Agent") || "";
+        const userAgentLower = userAgent.toLowerCase();
 
-        if (userAgent.includes("curl") || userAgent.includes("wget")) {
+        if (userAgentLower.includes("curl") || userAgentLower.includes("wget")) {
             const scriptResponse = await fetch(INSTALL_SCRIPT_URL);
             return new Response(scriptResponse.body, {
                 headers: { "Content-Type": "text/plain; charset=utf-8" },
