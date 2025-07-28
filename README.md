@@ -38,9 +38,9 @@ vet https://example.com/install.sh
 
 We believe you should never blindly trust a script from the internet—not even ours. That's why `vet` exists. The installation process itself is a perfect demonstration of the problem `vet` solves.
 
-## Homebrew (macOS/Linux) - Recommended
+## Homebrew
 
-The easiest and recommended way to install `vet` is via Homebrew.
+For macOS users, the easiest and recommended way to install `vet` is via Homebrew.
 ```
 # First, tap the official repository
 brew tap vet-run/vet
@@ -50,10 +50,31 @@ brew install vet-run
 ```
 **Note:** The formula is named `vet-run` to avoid a conflict with another tool in the Homebrew ecosystem, but this command will correctly install the `vet` executable on your system.
 
+## Community Packages
+
+### Arch Linux
+
+Installation from the Arch User Repository (AUR) is recommended for users of Arch or Arch-based Linux distributions. The official procedure is documented [here](https://wiki.archlinux.org/title/Arch_User_Repository#Installing_and_upgrading_packages), but here are the steps:
+```
+# First, clone the AUR git repo
+git clone https://aur.archlinux.org/vet.git
+
+cd vet
+
+# Now, as you should always do, review the PKGBUILD!
+cat PKGBUILD
+
+# Next, build the package and install
+makepkg -si
+```
+Use the [vet](https://aur.archlinux.org/packages/vet) package for stable releases, and the [vet-git](https://aur.archlinux.org/packages/vet-git) package for the latest vet commit.
+
+**Note:** These installation steps (and package updates) can of course be automated via an AUR helper such as [yay](https://github.com/Jguer/yay) or [paru](https://github.com/morganamilo/paru). But, as with the security principle that `vet` promotes, you should still read the PKGBUILD before building and installing the package.
+
 ## Manual Installation
 
 ### The Safe Way
-If you don't use Homebrew, or if you simply wish to follow the security-first principle that `vet` champions, you can perform a manual installation. This is the two-step "Download, then Review" process that demonstrates exactly what `vet` automates for you.
+If you don't use macOS/Arch Linux, or if you simply wish to follow the security-first principle that `vet` champions, you can perform a manual installation. This is the two-step "Download, then Review" process that demonstrates exactly what `vet` automates for you.
 
 1. **Download the installer**:
 
